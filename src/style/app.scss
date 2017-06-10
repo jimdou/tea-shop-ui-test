@@ -1,11 +1,23 @@
 @import "bootstrap";
 
+
+.searchbox {
+  background-color: #f7f7f9;
+  border: 1px solid #ddd;
+  padding: 10px 20px 10px 20px;
+  border-radius: calc(0.25rem - 1px);
+  margin-bottom: 30px;
+}
+
+
+
 .navbar {
   display: flex;
   justify-content: center;
 
   .top-bar {
-    max-width: 730px;
+    // max-width: 730px;
+    max-width: 830px;
     width: 100%;
     margin: 0 auto;
     display: flex;
@@ -94,7 +106,8 @@
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 768px) {
   .container {
-    max-width: 730px;
+    // max-width: 730px;
+    max-width: 830px;
   }
 
   /* Remove the padding we set earlier */
@@ -113,5 +126,3 @@
     border-bottom: 0;
   }
 }
-
-

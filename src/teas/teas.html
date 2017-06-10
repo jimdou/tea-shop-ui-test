@@ -1,3 +1,117 @@
-<div class="row" ng-controller="TeasCtrl as teas">
+
+<div class="row">
+  <div class="col-md-12">
+    <h1>Listing Featured Teas</h1>
+  </div>
+</div>
+
+<div ng-controller="TeasCtrl as teas">
+
+  <div class="searchbox">
+    <div class="row">
+      <div class="col-md-3">
+        Type:
+        <select ng-model="type">
+          <option value="">All</option>
+          <option value="Black">Black</option>
+          <option value="Chai">Chai</option>
+          <option value="Flowering">Flowering</option>
+          <option value="Food">Food</option>
+          <option value="Fruit">Fruit</option>
+          <option value="Green">Green</option>
+          <option value="Guayusa">Guayusa</option>
+          <option value="Herbal">Herbal</option>
+          <option value="Honeybush">Honeybush</option>
+          <option value="Matcha">Matcha</option>
+          <option value="Oolong">Oolong</option>
+          <option value="Pu-Erh">Pu-Erh</option>
+          <option value="Rooibos">Rooibos</option>
+          <option value="White">White</option>
+          <option value="Yellow">Yellow</option>
+          <option value="Yerba Maté">Yerba Maté</option>
+        </select>
+      </div>
+
+      <div class="col-md-3">
+          Sort by:
+          <select ng-model="orderProp">
+            <option value="">Name</option>
+            <option value="+price">Price ASC</option>
+            <option value="-price">Price DESC</option>
+          </select>
+      </div>
+
+      <div class="col-md-3">
+          Display:
+          <select ng-model="displayProp">
+            <option value="">Grid</option>
+            <option value="table">Table</option>
+          </select>
+      </div>
+
+      <div class="col-md-3">
+          <input placeholder="Seach teas..." ng-model="searchText.name" autofocus />
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="row" ng-show="displayProp != 'table'">
+    <div class="col-md-12">
+      <div class="card-columns" >
+        <div class="card" ng-repeat="tea in teas.teas | filter:searchText | filter:type | orderBy:orderProp track by $index ">
+          <div class="card-header">
+            Price: {{tea.price | currency:'$'}}
+            <i class="fa fa-usd"></i>
+          </div>
+
+          <img ng-if="tea.image" alt="{{tea.name}}" class="img-fluid" ng-src="/img/banner.jpg">
+
+          <div class="card-block">
+            <h4 class="card-title">{{tea.name}}</h4>
+            <p class="card-text">Type: {{tea.type}}</p>
+            <p class="card-text">{{tea.description}}</p>
+          </div>
+          <div class="card-block">
+            <a class="card-link" ng-href="/teas/{{tea.id}}">Product Page</a> <br />
+            <a class="card-link" ng-href="{{tea.link}}">Details Source</a>
+            <ngcart-addtocart id="{{tea.id}}" data="tea" name="{{tea.name}}" price="{{tea.price}}" quantity="1" quantity-max="5" style="color: white"><i class="fa fa-cart-plus"></i> Add to Cart</ngcart-addtocart>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row" ng-show="displayProp == 'table'">
+    <div class="col-md-12">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Image</th>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Description</th>
+            <th>Ajouter au panier</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="tea in teas.teas | filter:searchText | filter:type | orderBy:orderProp track by $index">
+            <td>
+              <img ng-if="tea.image" alt="{{tea.name}}" class="img-fluid" ng-src="/img/banner.jpg" width="100">
+            </td>
+            <td>{{tea.name}}</td>
+            <td>{{tea.type}}</td>
+            <td>{{tea.description}}</td>
+            <td>
+              <ngcart-addtocart id="{{tea.id}}" data="tea" name="{{tea.name}}" price="{{tea.price}}" quantity="1" quantity-max="5" style="color: white"><i class="fa fa-cart-plus"></i> Add to Cart</ngcart-addtocart>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
 
 </div>
